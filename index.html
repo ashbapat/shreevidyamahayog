@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
+<title>Shreevidya Akhandmahayog</title>
+<meta name="theme-color" content="#2B0E14">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="https://shreevidyamahayog.org/wp-content/uploads/2024/08/ganesh.png">
+<link rel="icon" href="https://shreevidyamahayog.org/wp-content/uploads/2024/08/ganesh.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon-950:#20090D;
+    --maroon-900:#2B0E14;
+    --maroon-800:#421621;
+    --maroon-700:#5A1E2C;
+    --vermilion:#B0432B;
+    --vermilion-bright:#C9552F;
+    --gold:#C9974A;
+    --gold-soft:#8A6B3A;
+    --ivory:#F1E7D6;
+    --sand:#C9B896;
+    --sand-dim:#8B7A5E;
+    --line: rgba(201,151,74,0.28);
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;height:100%;background:var(--maroon-950);}
+  body{
+    font-family:'Mukta',system-ui,sans-serif;
+    color:var(--ivory);
+    overscroll-behavior:none;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Marcellus',serif; font-weight:400; letter-spacing:0.01em;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  #app{
+    max-width:520px;
+    margin:0 auto;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:var(--maroon-950);
+    position:relative;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    padding: calc(14px + var(--safe-top)) 20px 14px;
+    background:linear-gradient(180deg, var(--maroon-950) 70%, rgba(32,9,13,0.0));
+    display:flex; align-items:center; gap:12px;
+    border-bottom:1px solid var(--line);
+  }
+  .topbar img{width:32px; height:32px; border-radius:50%; border:1px solid var(--line);}
+  .topbar .marks{line-height:1.1;}
+  .topbar .marks .en{font-family:'Marcellus',serif; font-size:16.5px; color:var(--ivory);}
+  .topbar .marks .sub{font-size:11px; color:var(--sand-dim); letter-spacing:0.02em;}
+
+  /* ---------- Screens ---------- */
+  .screen{display:none; flex:1; padding-bottom:calc(84px + var(--safe-bottom));}
+  .screen.active{display:block;}
+
+  section{padding:26px 20px;}
+  section + section{border-top:1px solid var(--line);}
+  .eyebrow-free-title{font-size:22px; margin:0 0 12px;}
+  p{line-height:1.62; color:var(--sand); font-size:15px; margin:0 0 12px;}
+  p:last-child{margin-bottom:0;}
+
+  /* ---------- Home hero ---------- */
+  .hero{
+    position:relative;
+    padding:0;
+    min-height:340px;
+    display:flex;
+    align-items:flex-end;
+    border-top:none;
+  }
+  .hero img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top;
+    filter:saturate(0.9);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(32,9,13,0.15) 0%, rgba(32,9,13,0.55) 55%, var(--maroon-950) 100%);
+  }
+  .hero-content{position:relative; z-index:2; padding:24px 20px 28px;}
+  .hero-content h1{font-size:30px; margin:0 0 10px; color:var(--ivory);}
+  .hero-content p{color:var(--sand); font-size:14.5px; max-width:36ch;}
+
+  .quote{
+    padding:28px 20px;
+    background:var(--maroon-900);
+  }
+  .quote blockquote{
+    margin:0; font-family:'Marcellus',serif; font-size:18px; line-height:1.5; color:var(--ivory);
+    border-left:2px solid var(--gold); padding-left:16px;
+  }
+  .quote cite{display:block; margin-top:12px; font-style:normal; font-size:13px; color:var(--gold);}
+
+  .cta-row{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:11px 18px; font-size:14px; border-radius:2px;
+    border:1px solid var(--gold); color:var(--ivory); background:transparent;
+  }
+  .btn.solid{background:var(--vermilion); border-color:var(--vermilion); color:var(--ivory);}
+
+  /* ---------- Cards ---------- */
+  .panel{
+    border:1px solid var(--line);
+    padding:16px;
+    margin-bottom:14px;
+    background:var(--maroon-900);
+  }
+  .panel:last-child{margin-bottom:0;}
+  .panel .kicker{font-size:11.5px; color:var(--gold); margin-bottom:6px;}
+  .panel h3{font-size:16.5px; margin:0 0 6px; color:var(--ivory); font-weight:600; font-family:'Mukta',sans-serif;}
+  .panel p{font-size:13.5px; margin-bottom:8px;}
+  .panel a.more{font-size:13px; color:var(--gold); border-bottom:1px solid var(--gold-soft);}
+
+  .book-row{display:flex; gap:12px; margin-bottom:16px; align-items:flex-start;}
+  .book-row:last-child{margin-bottom:0;}
+  .book-row img{width:58px; height:78px; object-fit:cover; border:1px solid var(--line); flex-shrink:0;}
+  .book-row .b-meta{flex:1;}
+  .book-row h3{font-size:15px; margin:0 0 4px;}
+  .book-row .date{font-size:11.5px; color:var(--sand-dim); margin-bottom:4px; display:block;}
+  .book-row p{font-size:13px; margin-bottom:6px;}
+
+  h2.section-title{font-size:19px; margin:0 0 16px; color:var(--ivory);}
+
+  .divider-gold{height:1px; background:var(--line); margin:0;}
+
+  /* ---------- Social / footer ---------- */
+  .social-row{display:flex; gap:10px; margin-top:6px;}
+  .social-row a{
+    border:1px solid var(--line); padding:9px 14px; font-size:13px; color:var(--sand);
+  }
+  footer{padding:22px 20px 10px; text-align:center;}
+  footer p{font-size:11.5px; color:var(--sand-dim);}
+
+  /* ---------- Bottom nav ---------- */
+  nav.tabbar{
+    position:fixed; left:50%; transform:translateX(-50%);
+    bottom:0; width:100%; max-width:520px;
+    background:var(--maroon-900);
+    border-top:1px solid var(--line);
+    display:flex;
+    padding-bottom:var(--safe-bottom);
+    z-index:30;
+  }
+  nav.tabbar button{
+    flex:1; background:none; border:none; color:var(--sand-dim);
+    font-family:'Mukta',sans-serif; font-size:11px;
+    padding:10px 4px 9px;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+  }
+  nav.tabbar button svg{width:20px; height:20px; stroke:var(--sand-dim); fill:none; stroke-width:1.6;}
+  nav.tabbar button.active{color:var(--gold);}
+  nav.tabbar button.active svg{stroke:var(--gold);}
+
+  .lang-pill{
+    font-size:11px; color:var(--sand-dim); border:1px solid var(--line);
+    padding:4px 10px; margin-left:auto; flex-shrink:0;
+  }
+
+  .subnav{display:flex; gap:8px; padding:0 20px 16px; overflow-x:auto; scrollbar-width:none;}
+  .subnav::-webkit-scrollbar{display:none;}
+  .subnav button{
+    flex-shrink:0; background:none; border:1px solid var(--line); color:var(--sand);
+    padding:8px 14px; font-size:13px; font-family:'Mukta',sans-serif;
+  }
+  .subnav button.active{border-color:var(--vermilion); color:var(--ivory); background:var(--maroon-800);}
+
+  .sub-panel{display:none;}
+  .sub-panel.active{display:block;}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <div class="topbar">
+    <img src="https://shreevidyamahayog.org/wp-content/uploads/2024/08/ganesh.png" alt="">
+    <div class="marks">
+      <div class="en">Shreevidya Akhandmahayog</div>
+      <div class="sub" id="topbar-sub">Home</div>
+    </div>
+    <div class="lang-pill">EN</div>
+  </div>
+
+  <!-- ============ HOME ============ -->
+  <div class="screen active" id="screen-home">
+    <div class="hero">
+      <img src="https://shreevidyamahayog.org/wp-content/uploads/2024/09/gurudev_hero.png" alt="Shree Gurudev">
+      <div class="hero-content">
+        <h1>Shreevidya Akhandmahayog</h1>
+        <p>An ancient discipline that weaves together Hatha, Mantra, Bhakti and every other branch of yoga into one path, carried forward today by Shree Sadguru Shriniwasji Shamrao Katkar.</p>
+        <div class="cta-row">
+          <a class="btn solid" href="#" onclick="goTab('teachings')">About the tradition</a>
+          <a class="btn" href="#" onclick="goTab('books')">Browse books</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote">
+      <blockquote>Shree Mata loves her children without condition. To feel that love, we her children must learn to surrender in return, without ego.</blockquote>
+      <cite>— Shree Gurudev</cite>
+    </div>
+
+    <section>
+      <h2 class="section-title">Upcoming</h2>
+      <div class="panel">
+        <div class="kicker">Wed, 29 July 2026 · Ashadha Shukla Purnima</div>
+        <h3>Guru Purnima Darshan Ceremony 2026</h3>
+        <p>An invitation to all sadhaks, sadhikas and followers of Sanatana Dharma to attend this year's Darshan Ceremony on the occasion of Guru Purnima.</p>
+        <a class="more" href="https://shreevidyamahayog.org/events/guru-purnima-darshan-ceremony-2026-invitation/" target="_blank" rel="noopener">Full invitation</a>
+      </div>
+      <div class="panel">
+        <div class="kicker">Every Sunday · 9:00 – 11:00 AM</div>
+        <h3>Meditation Center, Jule Solapur</h3>
+        <p>Weekly meditation, chanting and study sessions at the Srividya Akhand Mahayoga Study Centre, open to all interested seekers.</p>
+        <a class="more" href="https://shreevidyamahayog.org/events/meditation-center-every-sunday/" target="_blank" rel="noopener">Details</a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">From the articles</h2>
+      <div class="panel">
+        <h3>True Happiness — the goal of a spiritual aspirant</h3>
+        <p>A dialogue between Shree Gurudev and spiritual aspirants in the USA, on what a seeker should really be aiming for: knowledge, or wisdom.</p>
+        <a class="more" href="https://shreevidyamahayog.org/articles/true-happiness-goal-of-a-spiritual-aspirant/" target="_blank" rel="noopener">Read</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ TEACHINGS ============ -->
+  <div class="screen" id="screen-teachings">
+    <div class="subnav">
+      <button class="sub-btn active" data-sub="t-shreevidya">Shreevidya</button>
+      <button class="sub-btn" data-sub="t-gurudev">Shree Gurudev</button>
+      <button class="sub-btn" data-sub="t-history">Historical survey</button>
+    </div>
+
+    <div class="sub-panel active" id="t-shreevidya">
+      <section style="padding-top:4px;">
+        <h2 class="section-title">What is Shreevidya Akhandmahayog</h2>
+        <p>The tradition traces its origin to Lord Dakshinamurty — Shiva in his role as teacher of the whole cosmos — and aims at the fullest spiritual realization for a sincere seeker.</p>
+        <p>Shreevidya is described as the supreme conscious force, the living energy of the formless Absolute, the way heat belongs to fire or light belongs to the sun. It's this energy that gives rise to the entire world of name and form.</p>
+        <p>It's called <em>Mahayoga</em> because it works on the body through ritual, the mind through meditation, and speech through mantra recitation, all at once. It's called <em>Akhand</em> — "whole" or "undivided" — because no part of a person is treated as unimportant on the path; every aspect of body, mind and speech is meant to be brought into the practice.</p>
+        <a class="btn" style="margin-top:8px;" href="https://shreevidyamahayog.org/about-shreevidya-akhandmahayog/" target="_blank" rel="noopener">Read the full page</a>
+      </section>
+    </div>
+
+    <div class="sub-panel" id="t-gurudev">
+      <section style="padding-top:4px;">
+        <h2 class="section-title">Shree Gurudev</h2>
+        <p>Prof. Shriniwas Shamrao Katkar — known to devotees as Shree Gurudev — is a practicing mahayogi and philosopher who has guided spiritual seekers for decades, regardless of their class, caste, language or gender.</p>
+        <p>In 1975, while on pilgrimage to Tirupati, he travelled to Kanchipuram and came into contact with His Holiness Shri Chandrashekharendra Saraswati — the 68th pontiff of Kanchi Kamakoti Peetham, widely revered as Paramacharya. Paramacharya initiated him into Shreevidyamahayoga through Vedha Diksha, and Shriniwasji began his sadhana under that guidance, staying in frequent contact with his guru in the years that followed.</p>
+        <a class="btn" style="margin-top:8px;" href="https://shreevidyamahayog.org/about-shri-gurudev/" target="_blank" rel="noopener">Read the full biography</a>
+      </section>
+    </div>
+
+    <div class="sub-panel" id="t-history">
+      <section style="padding-top:4px;">
+        <h2 class="section-title">A historical survey</h2>
+        <p>The tradition draws on all four major branches of yoga without insisting on any single one, which is the sense in which it's called both "Maha" (supreme) and "Akhand" (undivided) yoga.</p>
+        <p>Rooted in the Vedas, it takes an inclusive view of spiritual life — treating the physical body, the vital energy or prana, the mind, the intellect, and the ego as different levels of the same personality, each one worth working with on the way to realizing Parabrahman.</p>
+        <a class="btn" style="margin-top:8px;" href="https://shreevidyamahayog.org/shrividya-akhandmahayog-a-historical-survey/" target="_blank" rel="noopener">Read the full survey</a>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ BOOKS ============ -->
+  <div class="screen" id="screen-books">
+    <section style="padding-top:22px;">
+      <h2 class="section-title">Books by Shree Gurudev</h2>
+
+      <div class="book-row">
+        <img src="https://shreevidyamahayog.org/wp-content/uploads/2026/07/श्रीएकाक्षरीगणेशयंत्ररहस्यप्रकाश.avif" alt="">
+        <div class="b-meta">
+          <span class="date">27 Jul 2026</span>
+          <h3>Shri Ekakshari Ganesh Yantra Rahasyaprakash</h3>
+          <p>A guide to the esoteric, scripturally-grounded worship of Shri Ekakshari Vighneshwar Varadvinayak Ganesh through his sacred Yantra — largely unpublished knowledge until this booklet.</p>
+          <a class="more" href="https://shreevidyamahayog.org/books/shri-ekakshari-ganesh-yantra-rahasyaprakash/" target="_blank" rel="noopener">Read more</a>
+        </div>
+      </div>
+
+      <div class="book-row">
+        <img src="https://shreevidyamahayog.org/wp-content/uploads/2026/07/श्रीदेवी-श्रीवेंकटेश-नवरात्र-पूजनविधी.avif" alt="">
+        <div class="b-meta">
+          <span class="date">23 Jul 2026</span>
+          <h3>Shridevi (Venkatesh) Navratra Pujanvidhi</h3>
+          <p>A step-by-step guide to Ghatasthapana and the nine days of Navratri worship — rituals, offerings and the correct sequence to follow.</p>
+          <a class="more" href="https://shreevidyamahayog.org/books/shridevi-venkatesh-navratra-pujanvidhi/" target="_blank" rel="noopener">Read more</a>
+        </div>
+      </div>
+
+      <div class="book-row">
+        <img src="https://shreevidyamahayog.org/wp-content/uploads/2026/07/श्रीमहालक्ष्मीपूजनविधी.avif" alt="">
+        <div class="b-meta">
+          <span class="date">23 Jul 2026</span>
+          <h3>Shri Mahalakshmi Puja Vidhi</h3>
+          <p>A clear, organized method for invoking and worshipping Mother Shri Mahalakshmi together with her associated forms and family deities.</p>
+          <a class="more" href="https://shreevidyamahayog.org/books/shri-mahalakshmi-puja-vidhi/" target="_blank" rel="noopener">Read more</a>
+        </div>
+      </div>
+
+      <a class="btn solid" style="width:100%; text-align:center; margin-top:6px;" href="https://shreevidyamahayog.org/books/" target="_blank" rel="noopener">See all books</a>
+    </section>
+  </div>
+
+  <!-- ============ EVENTS ============ -->
+  <div class="screen" id="screen-events">
+    <section style="padding-top:22px;">
+      <h2 class="section-title">Upcoming events</h2>
+      <div class="panel">
+        <div class="kicker">Wed, 29 July 2026</div>
+        <h3>Guru Purnima Darshan Ceremony 2026</h3>
+        <p>Bhagwan Vedavyasa Purnima falls this year on Ashadha Shukla Purnima (Shaka 1948). All sadhaks, sadhikas and followers of Sanatana Dharma are invited to the Darshan Ceremony.</p>
+        <a class="more" href="https://shreevidyamahayog.org/events/guru-purnima-darshan-ceremony-2026-invitation/" target="_blank" rel="noopener">Full invitation</a>
+      </div>
+      <div class="panel">
+        <div class="kicker">Every Sunday, 9:00 – 11:00 AM</div>
+        <h3>Meditation Center — Jule Solapur</h3>
+        <p>Open weekly sessions for meditation, chanting and study at the Srividya Akhand Mahayoga Study Centre. Photo albums from the recent Gurupurnima event are also available to view.</p>
+        <a class="more" href="https://shreevidyamahayog.org/events/meditation-center-every-sunday/" target="_blank" rel="noopener">Details</a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">From the gallery</h2>
+      <div class="panel">
+        <div class="kicker">15 February 2026 · Mahashivratri</div>
+        <h3>Darshan &amp; Shivshakti meditation initiation</h3>
+        <p>Over three thousand devotees gathered at Padmavati Convention Hall, Solapur, for darshan, bhajan, satsang and meditation initiation led by Shree Gurudev.</p>
+      </div>
+      <div class="panel">
+        <div class="kicker">10 July 2025 · Gurupornima</div>
+        <h3>Darshan ceremony &amp; succession</h3>
+        <p>Shree Gurudev appointed his son, Chiranjiv Aniruddha Katkar, as his spiritual successor, bestowing on him the title Aniruddha Siddhacharya.</p>
+      </div>
+      <a class="more" href="https://shreevidyamahayog.org/gallery/" target="_blank" rel="noopener">See full gallery</a>
+    </section>
+  </div>
+
+  <!-- ============ MORE ============ -->
+  <div class="screen" id="screen-more">
+    <section style="padding-top:22px;">
+      <h2 class="section-title">Articles</h2>
+      <div class="panel">
+        <h3>True Happiness — Goal of a Spiritual Aspirant</h3>
+        <p>From a dialogue with aspirants in the USA on Hindu New Year: is the goal of a seeker to gain knowledge, or something deeper — wisdom?</p>
+        <a class="more" href="https://shreevidyamahayog.org/articles/true-happiness-goal-of-a-spiritual-aspirant/" target="_blank" rel="noopener">Read</a>
+      </div>
+      <div class="panel">
+        <h3>Vedic Hinduism</h3>
+        <p>A conversation with young Americans placing Hinduism within the wider religious world, alongside the Abrahamic and other non-Abrahamic traditions.</p>
+        <a class="more" href="https://shreevidyamahayog.org/articles/vedic-hinduism/" target="_blank" rel="noopener">Read</a>
+      </div>
+      <a class="more" href="https://shreevidyamahayog.org/articles/" target="_blank" rel="noopener">All articles</a>
+    </section>
+
+    <section>
+      <h2 class="section-title">Watch</h2>
+      <div class="panel">
+        <h3>Meaning of Shreevidya</h3>
+        <p>Shree Gurudev explains the true nature of Shreevidya — the supreme wisdom at the heart of the tradition.</p>
+        <a class="more" href="https://youtu.be/GVOyTV5ztmU" target="_blank" rel="noopener">Watch on YouTube</a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Connect</h2>
+      <p>Get in touch, or follow along for updates between events.</p>
+      <div class="social-row">
+        <a href="https://shreevidyamahayog.org/contact-us/" target="_blank" rel="noopener">Contact us</a>
+        <a href="https://www.facebook.com/groups/Shreevidyamahayog/about" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.youtube.com/channel/UCu9TNGbekVKJaZXHJR140ig" target="_blank" rel="noopener">YouTube</a>
+      </div>
+      <p style="margin-top:16px;">The website is also available in Marathi.</p>
+      <a class="btn" href="https://shreevidyamahayog.org/mr/" target="_blank" rel="noopener">मराठीत वाचा</a>
+    </section>
+
+    <footer>
+      <p>© Shreevidya Akhandmahayog. Content sourced from shreevidyamahayog.org</p>
+    </footer>
+  </div>
+
+  <!-- ============ BOTTOM NAV ============ -->
+  <nav class="tabbar">
+    <button class="tab-btn active" data-tab="home" onclick="goTab('home')">
+      <svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5M6 10v9a1 1 0 0 0 1 1h4v-6h2v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      Home
+    </button>
+    <button class="tab-btn" data-tab="teachings" onclick="goTab('teachings')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M12 3.8v16.4M3.8 12h16.4"/></svg>
+      Teachings
+    </button>
+    <button class="tab-btn" data-tab="books" onclick="goTab('books')">
+      <svg viewBox="0 0 24 24"><path d="M4 5.2c2.4-1 5.2-1 8 0 2.8-1 5.6-1 8 0v13.6c-2.4-1-5.2-1-8 0-2.8-1-5.6-1-8 0Z"/><path d="M12 5.2v13.6"/></svg>
+      Books
+    </button>
+    <button class="tab-btn" data-tab="events" onclick="goTab('events')">
+      <svg viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="0.5"/><path d="M4 9.5h16M8 3.5v3M16 3.5v3"/></svg>
+      Events
+    </button>
+    <button class="tab-btn" data-tab="more" onclick="goTab('more')">
+      <svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>
+      More
+    </button>
+  </nav>
+
+</div>
+
+<script>
+  const titles = {home:'Home', teachings:'Teachings', books:'Books', events:'Events', more:'More'};
+
+  function goTab(name){
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+    document.getElementById('topbar-sub').textContent = titles[name];
+    document.getElementById('app').scrollTop = 0;
+    window.scrollTo(0,0);
+  }
+
+  document.querySelectorAll('.sub-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.sub).classList.add('active');
+    });
+  });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+</script>
+
+</body>
+</html>

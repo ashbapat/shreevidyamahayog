@@ -1,0 +1,23 @@
+{
+  "name": "Shreevidya Akhandmahayog",
+  "short_name": "Shreevidya",
+  "description": "Teachings, books, events and articles from Shreevidya Akhandmahayog.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#20090D",
+  "theme_color": "#2B0E14",
+  "icons": [
+    {
+      "src": "https://shreevidyamahayog.org/wp-content/uploads/2024/08/ganesh.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://shreevidyamahayog.org/wp-content/uploads/2024/08/ganesh.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
